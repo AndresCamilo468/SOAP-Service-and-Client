@@ -1,0 +1,46 @@
+<definitions name = "feedTag"
+   targetNamespace = "http://www.examples.com/wsdl/MyService.wsdl"
+   xmlns = "http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:tns = "http://www.examples.com/wsdl/MyService.wsdl"
+   xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+
+   <message name = "tagsRequest">
+      <part name = "name" type = "xsd:string"/>
+   </message>
+
+   <message name = "tagsResponse">
+      <part name = "saludo" type = "xsd:string"/>
+   </message>
+   
+   <portType name = "funtions">
+      <operation name = "tags">
+         <input message = "tns:tagsRequest"/>
+         <output message = "tns:tagsResponse"/>
+      </operation>
+   </portType>
+
+   <binding name = "feedTag_Binding" type = "tns:funtions">
+      <soap:binding style = "rpc" transport = "http://schemas.xmlsoap.org/soap/http"/>
+
+      <operation name = "tags">
+         <soap:operation soapAction = "tags"/>
+
+         <input>
+            <soap:body encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/" namespace = "urn:examples:feedTag" use = "encoded"/>
+         </input>
+         <output>
+            <soap:body encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/" namespace = "urn:examples:feedTag" use = "encoded"/>
+         </output>
+      </operation>
+      
+   </binding>
+
+   <service name = "feedTag">
+      <documentation>WSDL File for MyService</documentation>
+      <port binding = "tns:feedTag_Binding" name = "funtions">
+         <soap:address location = "http://localhost:8001/feedTag" />
+      </port>
+   </service>
+
+</definitions>
